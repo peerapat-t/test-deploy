@@ -12,7 +12,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY fastapi_app.py .
 
 # Expose port
-EXPOSE 5000
+EXPOSE 10000
 
 # Run
 CMD ["python", "fastapi_app.py"]
