@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  # Backend Service (FastAPI)
+  backend:
+    build: ./backend
+    container_name: my-fastapi-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app # Mounts local code for live-reloading
+    networks:
+      - app-network
+
+  # Frontend Service (Streamlit)
+  frontend:
+    build: ./frontend
+    container_name: my-streamlit-frontend
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./frontend:/app # Mounts local code for live-reloading
+    depends_on:
+      - backend # Ensures backend starts before frontend
+    networks:
+      - app-network
+
+# Define the network that allows services to communicate
+networks:
+  app-network:
+    driver: bridge
